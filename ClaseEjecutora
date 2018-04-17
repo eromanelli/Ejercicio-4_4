@@ -1,0 +1,43 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Ejecutora {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Empresa e = new Empresa();
+		int respuesta,valor;
+		String localidad,provincia;
+		
+		Scanner entrada = new Scanner (System.in);
+		do
+		{
+			System.out.println("MENU DE OPCIONES. 1=AGREGAR UNA NUEVA ENCOMIENDA. 2=INFORMAR EL COSTO DE UNA ENCOMIENDA 3=RETIRAR"
+					+ "ENCOMIENDAS PENDIENTES DE DESTINO 0=FIN DE OPERACIONES. ");
+			respuesta = entrada.nextInt();
+			
+			switch(respuesta)
+			{
+				case 1: e.agregarEncomienda();
+				break;
+				
+				case 2: 
+						System.out.println("INGRESE EL NUMERO DE ENCOMIENDA: ");
+						valor = entrada.nextInt();
+						e.informarCostoEncomienda(valor);
+				break;
+				
+				case 3: 	
+						System.out.println("INGRESE LOCALIDAD: ");
+						localidad = entrada.next();
+						System.out.println("INGRESE PROVINCIA: ");
+						provincia = entrada.next();
+						e.eliminarEncomiendasDestino(localidad, provincia);
+				break;
+				
+			}
+	   }while(respuesta!=0);
+		
+	}
+
+}
