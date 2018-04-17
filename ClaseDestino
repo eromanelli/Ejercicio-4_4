@@ -1,0 +1,46 @@
+import java.util.ArrayList;
+
+public class Destino {
+
+	private String localidad;
+	private String provincia;
+	private float km;
+	private ArrayList<Encomienda> encomiendas;
+	
+	public Destino(String str1, String str2, float valor1)
+	{
+		localidad = str1;
+		provincia = str2;
+		km = valor1;
+		
+	}
+	
+	public float devolverKm()
+	{
+		return km;
+	}
+	
+	public String devolverLocalidad() 
+	{
+		return localidad;
+	}
+	
+	public String devolverProvincia()
+	{
+		return provincia;
+	}
+	
+	public void eliminarEncomiendas()
+	{
+		int i;
+		for(i=0;i<encomiendas.size();i++)
+			
+		{
+			System.out.print("Numero de encomienda: "+encomiendas.get(i).devolverNumero());
+		}
+		
+		encomiendas.clear();
+		
+	}
+	
+}
