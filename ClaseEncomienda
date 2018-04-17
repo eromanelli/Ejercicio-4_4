@@ -1,0 +1,37 @@
+import java.util.ArrayList;
+
+public class Encomienda {
+
+	private int numero;
+	private String remitente;
+	private String destinatario;
+	private float peso;
+	private ArrayList<Destino> destinos;
+	
+	
+	public Encomienda(int valor1, String str1, String str2, float valor2)
+	{
+		numero = valor1;
+		remitente = str1;
+		destinatario = str2;
+		peso = valor2;
+		destinos = new ArrayList<Destino>();
+	}
+	
+	public int devolverNumero()
+	{
+		return numero;
+	}
+	
+	public float devolverPeso()
+	{
+		return peso;
+	}
+	
+	public Destino devolverDestino(Encomienda e)
+	{
+		int i=0;
+		return e.destinos.get(i);
+	}
+	
+}
