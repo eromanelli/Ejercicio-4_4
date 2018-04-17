@@ -1,0 +1,142 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
+
+public class Empresa {
+
+	private int cuit;
+	private String razonSocial;
+	private ArrayList<Encomienda> encomiendas;
+	private ArrayList<Destino> destinos;
+	
+	
+	public Empresa()
+	{
+		Scanner entrada = new Scanner (System.in);
+		System.out.println("Ingrese CUIT: ");
+		cuit = entrada.nextInt();
+		System.out.println("Ingrese razon social: ");
+		razonSocial = entrada.next();
+		encomiendas = new ArrayList<Encomienda>();
+		destinos = new ArrayList<Destino>();	
+	}
+	
+	// Punto 1
+	
+	public void agregarEncomienda()
+	{
+		Scanner entrada = new Scanner (System.in);
+		System.out.print("Ingrese una localidad:  ");
+		String localidad = entrada.next();
+		System.out.println("Ingrese una provincia: ");
+		String provincia = entrada.next();
+		if(buscarDestino(localidad,provincia)==null)
+		{
+			System.out.println("ERROR. DESTINO NO ENCONTRADO");
+		}
+		else
+			{
+			System.out.println("Ingrese numero de encomienda: ");
+			int numero = entrada.nextInt();
+			System.out.println("Ingrese remintente: ");
+			String remitente = entrada.next();
+			System.out.println("Ingrese destinatario: ");
+			String destinatario = entrada.next();
+			System.out.println("Ingrese peso de la carga: ");
+			float peso = entrada.nextFloat();
+			
+			Encomienda e = new Encomienda(numero,remitente,destinatario,peso);
+			encomiendas.add(e);
+			}
+	}
+	
+	// Punto 2
+	
+	public void informarCostoEncomienda(int valor)
+	{
+		Encomienda e = buscarEncomienda1(valor);
+		if(e==null)
+		{
+			System.out.println("ERROR. ENCOMIENDA NO EXISTENTE");
+		}
+		else
+			{
+				System.out.println("COSTO: "+this.calcularCostoEncomienda(e));
+			}
+	}
+	
+	public Destino buscarDestino(String str1, String str2)
+	{
+		int i=0;
+			while((i<destinos.size()) && (destinos.get(i).devolverLocalidad()!=str1) && (destinos.get(i).devolverProvincia()!=str2))
+			{
+				i++;
+			}
+			if(i==destinos.size())
+			{
+				return null;
+			}
+			else
+				return destinos.get(i);
+	}
+	
+	public Encomienda buscarEncomienda1(int valor)
+	{
+		int i=0;
+		while((i<encomiendas.size() && encomiendas.get(i).devolverNumero()!=valor))
+		{
+			i++;
+		}
+		if(i==encomiendas.size())
+		{
+			return null;
+		}
+		else
+			{
+				return encomiendas.get(i);
+			}
+	}
+	
+	public float calcularCostoEncomienda(Encomienda e)
+	{
+		float costoTotal=0;
+		Destino d;
+		d=e.devolverDestino(e);
+		if(d.devolverKm()<100)
+		{
+			costoTotal=100;
+		}
+		else
+		{
+			if(d.devolverKm()<400)
+			{
+				costoTotal=400;
+			}
+		
+				if(d.devolverKm()>1000)
+				{
+					costoTotal=1000;
+				}
+		}
+		
+		costoTotal=(costoTotal*e.devolverPeso());
+		
+		return costoTotal;
+		
+	}
+	
+	public void eliminarEncomiendasDestino(String str1, String str2)
+	{
+		
+		Destino d = buscarDestino(str1,str2);
+		if(d==null)
+		{
+			System.out.println("NO SE ENCONTRO EL DESTINO: ");
+		}
+		else
+			{
+				d.eliminarEncomiendas();
+			}
+	}
+	
+}  
